@@ -2030,7 +2030,7 @@ void gioca()
 				}
 
 				mossa = 1;
-				if (morte == 0)
+				if (morte == 1)
 				{
 					Giocatori[player] -> turn ++;
 				}

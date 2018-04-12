@@ -11,6 +11,23 @@ static Giocatore *Giocatori[2];
 static int turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, Spawn = 0, morte = 0, difficolta_selezionata = 0; //player da mettere static per evitare problemi con i turni e con l'alternarsi dei giocatori, mossa serve principalmente per la funzione adrenalina;
 static int CountZone = 0, ZoneNumber = 0; //CountZone è il numero di zone presenti
 
+void tutorial()
+{
+	puts("\n************************************************************************************************************************************************************************\nBenvenuto nel mio gioco. Io sono l'Onnipotente e ti spiegherò al volo un paio di cose necessarie per 'giocare'. La prima cosa che devi sapere è che per iniziare a \nfarlo, devi prima creare una mappa. Come? Molto semplice. Appena finito di leggere questo mini-tutorial ti troverai di fronte a un menù dotato di 3 scelte. \nDovrai ovviamente selezionare quella per creare la mappa digitando il numero corrispondente sulla tastiera e premendo il tasto invio per confermare la selezione. \nNiente di astruso, insomma. Controllerai 2 giocatori, Marzia e Giacomo, che effettueranno azioni indipendenti l'una dell'altra (eccetto per il raccoglimento degli \noggetti: se prendo io un oggetto da terra, di sicuro non puoi farlo anche tu dopo, no?). L'obiettivo del gioco è arrivare alla fine con entrambi i personaggi vivi \n(o almeno si spera). Mi sono dimenticato di dirti una cosa importante: durante ogni turno puoi effettuare una sola azione (eccetto controllare lo zaino e/o gettare via \ncose: quello puoi farlo quante volte vuoi), ma utilizzando 1 unità di Adrenalina potrai effettuarne altre 2.\n\n************************************************************************************************************************************************************************\n\nTutto chiaro?\n\n1) Sì\n\n2) No\n\n");
+	int a;
+	scanf("%d", &a);
+	switch(a)
+	{
+		case 1:
+		puts("\nPerfetto allora, possiamo proseguire. Buona fortuna e buon divertimento ;)");
+		break;
+
+		default:
+		puts("\nPeggio per te, non mi aspettavo che tu capissi. Finirai in bocca ai pesci.");
+		break;
+	}
+}
+
 void dealloca()
 {
 	for(int i = 0; i < 2; i++)
@@ -160,7 +177,7 @@ static void Gieson(Giocatore *Giocatori)
 			{
 				morte = 1;
 				Giocatori -> stato_giocatore = 1;
-				printf("*****************************************************************\nNon avevi nulla con cui difenderti e Gieson ti ha fatto le scarpe\n*****************************************************************\n\n");
+				printf("*******************************************************************\nNon avevi nulla con cui difenderti: Gieson ti ha ucciso senza pietà\n*******************************************************************\n\n");
 			}
 		}
 	}
@@ -275,7 +292,7 @@ static void Gieson(Giocatore *Giocatori)
 			{
 				morte = 1;
 				Giocatori -> stato_giocatore = 1;
-				printf("*****************************************************************\nNon avevi nulla con cui difenderti e Gieson ti ha fatto le scarpe\n*****************************************************************\n\n");
+				printf("*******************************************************************\nNon avevi nulla con cui difenderti: Gieson ti ha ucciso senza pietà\n*******************************************************************\n\n");
 			}
 		}
 	}
@@ -390,7 +407,7 @@ static void Gieson(Giocatore *Giocatori)
 			{
 				morte = 1;
 				Giocatori -> stato_giocatore = 1;
-				printf("*****************************************************************\nNon avevi nulla con cui difenderti e Gieson ti ha fatto le scarpe\n*****************************************************************\n\n");
+				printf("*******************************************************************\nNon avevi nulla con cui difenderti: Gieson ti ha ucciso senza pietà\n*******************************************************************\n\n");
 			}
 		}
 	}
@@ -505,7 +522,7 @@ static void Gieson(Giocatore *Giocatori)
 			{	
 				morte = 1;
 				Giocatori -> stato_giocatore = 1;
-				printf("*****************************************************************\nNon avevi nulla con cui difenderti e Gieson ti ha fatto le scarpe\n*****************************************************************\n\n");
+				printf("*******************************************************************\nNon avevi nulla con cui difenderti: Gieson ti ha ucciso senza pietà\n*******************************************************************\n\n");
 			}
 		}
 	}
@@ -620,7 +637,7 @@ static void Gieson(Giocatore *Giocatori)
 			{
 				morte = 1;
 				Giocatori -> stato_giocatore = 1;
-				printf("*****************************************************************\nNon avevi nulla con cui difenderti e Gieson ti ha fatto le scarpe\n*****************************************************************\n\n");
+				printf("*******************************************************************\nNon avevi nulla con cui difenderti: Gieson ti ha ucciso senza pietà\n*******************************************************************\n\n");
 			}
 		}
 	}
@@ -735,7 +752,7 @@ static void Gieson(Giocatore *Giocatori)
 			{
 				morte = 1;
 				Giocatori -> stato_giocatore = 1;
-				printf("*****************************************************************\nNon avevi nulla con cui difenderti e Gieson ti ha fatto le scarpe\n*****************************************************************\n\n");
+				printf("*******************************************************************\nNon avevi nulla con cui difenderti: Gieson ti ha ucciso senza pietà\n*******************************************************************\n\n");	
 			}
 		}
 	}
@@ -784,6 +801,19 @@ static void avanza(Giocatore *Giocatori)
 		printf("\n\n*************************************************************************\nSegmentation Fault 11: Gieson non può seguirti fin qui, %s\n*************************************************************************\n\n", player == 0 ? "Giacomo sei salvo!" : "Marzia sei salva!");
 		Giocatori -> stato_giocatore = 4;
 		mossa--;
+	}
+
+	if (Giocatori -> ZoneNumber == CountZone - 1)
+	{
+		if (player == 0)
+		{
+			puts("\n*******************************************\nFinalmente vedo l'uscita, non ne potevo più\n*******************************************\n");
+		}
+
+		else if (player == 1)
+		{
+			puts("\n******************************************************************************************\nOddio ecco l'uscita finalmenteeee. Vedi di farmici arrivare, grassone davanti allo schermo\n******************************************************************************************\n");
+		}
 	}
 }
 
@@ -865,10 +895,12 @@ static void usa_adrenalina(Giocatore *Giocatori)
 	{
 		Giocatori -> zaino[ADRENALINA]--;
 		mossa ++;
+
+		puts("\n***************************************************************\nHai usato un'unità di Adrenalina: puoi effettuare altre 2 mosse\n***************************************************************");
 	}
 
 	else
-		puts("Non hai nessuna Adrenalina");
+		puts("\n**************************\nNon hai nessuna Adrenalina\n**************************");
 }
 
 static void zaino(Giocatore *Giocatori)
@@ -1174,22 +1206,18 @@ static void inizializza()
 		Giocatori[i] = (Giocatore*) malloc(sizeof(Giocatore));
 		Giocatori[i] -> stato_giocatore = 3;
 		Giocatori[i] -> posizione = prima_zona;
+		Giocatori[i] -> zaino[CIANFRUSAGLIA] = 0;
+		Giocatori[i] -> zaino[BENDE] = 0;
+		Giocatori[i] -> zaino[PISTOLA] = 0;
+		Giocatori[i] -> zaino[BENZINA] = 0;
+		Giocatori[i] -> turn = 1;
+		Giocatori[i] -> ZoneNumber = 1;
 	}
-
-	Giocatori[0] -> zaino[BENDE] = 0;
-	Giocatori[1] -> zaino[BENDE] = 0;
+	//Giocatori[0] -> stato_giocatore =1;
 	Giocatori[0] -> zaino[COLTELLO] = 1;
 	Giocatori[1] -> zaino[COLTELLO] = 0;
-	Giocatori[0] -> zaino[PISTOLA] = 0;
-	Giocatori[1] -> zaino[PISTOLA] = 0;
-	Giocatori[0] -> zaino[BENZINA] = 0;
-	Giocatori[1] -> zaino[BENZINA] = 0;
 	Giocatori[0] -> zaino[ADRENALINA] = 0;
 	Giocatori[1] -> zaino[ADRENALINA] = 2;
-	Giocatori[0] -> turn = 1;
-	Giocatori[1] -> turn = 1;
-	Giocatori[0] -> ZoneNumber = 1;
-	Giocatori[1] -> ZoneNumber = 1;
 }
 
 static void random_map()
@@ -1200,6 +1228,127 @@ static void random_map()
 		ultima_zona = (Zona *) malloc(sizeof(Zona));
 		ultima_zona = prima_zona;
 		CountZone++;
+
+		int zone = rand()%5 + 1;
+		int oggetto = rand()%10;
+
+		switch (zone)
+		{	
+			case 1:
+			ultima_zona -> zona = CUCINA;
+
+			switch(oggetto)
+			{
+				case 0 ... 2 :
+				ultima_zona -> oggetto = CIANFRUSAGLIA;
+				break;
+
+				case 3 ... 4 :
+				ultima_zona -> oggetto = BENDE;
+				break;
+
+				case 5 ... 8 :
+				ultima_zona -> oggetto = COLTELLO;
+				break;
+
+				case 9:
+				ultima_zona -> oggetto = ADRENALINA;
+				break;
+			}
+			break;
+
+			case 2:
+			ultima_zona -> zona = SOGGIORNO;
+
+			switch(oggetto)
+			{
+				case 0 ... 1 :
+				ultima_zona -> oggetto = CIANFRUSAGLIA;
+				break;
+
+				case 2 :
+				ultima_zona -> oggetto = BENDE;
+				break;
+
+				case 3 :
+				ultima_zona -> oggetto = COLTELLO;
+				break;
+
+				case 4 ... 6 :
+				ultima_zona -> oggetto = PISTOLA;
+				break;
+
+				case 7 ... 9:
+				ultima_zona -> oggetto = ADRENALINA;
+				break;
+			}
+			break;
+
+			case 3:
+			ultima_zona -> zona = RIMESSA;
+
+			switch(oggetto)
+			{
+				case 0 ... 1 :
+				ultima_zona -> oggetto = CIANFRUSAGLIA;
+				break;
+
+				case 2 :
+				ultima_zona -> oggetto = BENDE;
+				break;
+
+				case 3 ... 5 :
+				ultima_zona -> oggetto = COLTELLO;
+				break;
+
+				case 6 ... 8 :
+				ultima_zona -> oggetto = BENZINA;
+				break;
+
+				case 9:
+				ultima_zona -> oggetto = ADRENALINA;
+				break;
+			}				
+			break;
+
+			case 4:
+			ultima_zona -> zona = STRADA;
+
+			switch(oggetto)
+			{
+				case 0 ... 7 :
+				ultima_zona -> oggetto = CIANFRUSAGLIA;
+					break;
+
+				case 8 :
+				ultima_zona -> oggetto = COLTELLO;
+				break;
+
+				case 9:
+				ultima_zona -> oggetto = BENZINA;
+				break;
+			}				
+			break;
+
+			case 5:
+			ultima_zona -> zona = LUNGO_LAGO;
+
+			switch(oggetto)
+			{
+				case 0 ... 6 :
+				ultima_zona -> oggetto = CIANFRUSAGLIA;
+				break;
+
+				case 7 :
+				ultima_zona -> oggetto = COLTELLO;
+				break;
+
+				case 8 ... 9:
+				ultima_zona -> oggetto = BENZINA;
+				break;
+			}			
+			break;
+		}	
 	}
 
 	if (ultima_zona -> zona == 6)
@@ -1616,6 +1765,7 @@ static void stampa_mappa()
 		break;
 		}
 		printf("L'indirizzo di memoria della zona successiva è %p\n\n", temp -> zona_successiva);
+		
 		/*switch (temp -> oggetto)
 		{
 		case 0:
@@ -1751,8 +1901,7 @@ void gioca()
 		do
 		{
 			morte = 0;
-			Spawn = 0;
-
+			
 			if (turn == 0)
 			{
 				inizializza();
@@ -1762,7 +1911,7 @@ void gioca()
 
 			if (Giocatori[0] -> stato_giocatore == 4 && Giocatori[1] -> stato_giocatore == 4)
 			{	
-				puts("*****************************************************************************************\nGiocare a League of Legends durante le spiegazioni di Santini ti ha ripagato, bel lavoro!\n*****************************************************************************************\n");
+				puts("*****************************************************************************************\nGiocare a League of Legends durante le spiegazioni di Santini ti ha ripagato, bel lavoro!\n*****************************************************************************************");
 				puts("\n***********\n*Game Over*\n***********\n");
 				puts("\nAvviare una nuova partita?\n\n1) Sì\n\n2) No\n\n");
 				scanf("%d", &a);
@@ -1770,7 +1919,7 @@ void gioca()
 				switch(a)
 				{
 					case 1:
-					turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0;
+					turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
 					inizializza();
 					dealloca();
 					main();
@@ -1778,7 +1927,7 @@ void gioca()
 
 					case 2:
 					puts("\n***********\n*Game Over*\n***********\n");
-					turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0;
+					turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
 					inizializza();
 					dealloca();
 					exit(1);
@@ -1791,7 +1940,7 @@ void gioca()
 			}
 
 			if(Giocatori[0] -> stato_giocatore != 1 && Giocatori[1] -> stato_giocatore != 1 && mossa == 0)
-			{
+			{	
 				if (benzina_usata <= 0 && Spawn == 0)
 				{
 					Gieson(Giocatori[player]);
@@ -1805,10 +1954,69 @@ void gioca()
 
 			if (Giocatori[0] -> stato_giocatore == 1 || Giocatori[1] -> stato_giocatore == 1 || Giocatori[0] -> stato_giocatore == 4 || Giocatori[1] -> stato_giocatore == 4 && mossa == 0)
 			{
-
 			 	if (Giocatori[0] -> stato_giocatore == 1 || Giocatori[0] -> stato_giocatore == 4)
 			 	{
 			 		player = 1;
+
+			 		if (Giocatori[1] -> stato_giocatore == 1 && Giocatori[0] -> stato_giocatore == 4)
+			 		{
+			 			puts("\n***********\n*Game Over*\n***********\n");
+			 			puts("\n******************************************\nPurtoppo non sei riuscito a salvare Marzia\n******************************************\n");
+						puts("\nAvviare una nuova partita?\n\n1) Sì\n\n2) No\n\n");
+						scanf("%d", &a);
+
+						switch(a)
+						{
+							case 1:
+							turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
+							inizializza();
+							dealloca();
+							main();
+							break;
+
+							case 2:
+							puts("\n***********\n*Game Over*\n***********\n");
+							turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
+							inizializza();
+							dealloca();
+							exit(1);
+							break;
+
+							default:
+							printf("\n****************************\nScelta non valida, riprovare\n****************************\n\n");
+							break;
+						}
+			 		}
+
+			 		else if (Giocatori[0] -> stato_giocatore == 1 && Giocatori[1] -> stato_giocatore == 4)
+			 		{
+			 			puts("\n***********\n*Game Over*\n***********\n");
+			 			puts("\n*******************************************\nPurtoppo non sei riuscita a salvare Giacomo\n*******************************************\n");
+						puts("\nAvviare una nuova partita?\n\n1) Sì\n\n2) No\n\n");
+						scanf("%d", &a);
+
+						switch(a)
+						{
+							case 1:
+							turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
+							inizializza();
+							dealloca();
+							main();
+							break;
+
+							case 2:
+							puts("\n***********\n*Game Over*\n***********\n");
+							turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
+							inizializza();
+							dealloca();
+							exit(1);
+							break;
+
+							default:
+							printf("\n****************************\nScelta non valida, riprovare\n****************************\n\n");
+							break;
+						}
+			 		}
 			 	}
 
 			 	else if (Giocatori[1] -> stato_giocatore == 1 || Giocatori[1] -> stato_giocatore == 4)
@@ -1826,36 +2034,37 @@ void gioca()
 				{
 					Giocatori[player] -> turn ++;
 				}
-			 	benzina_usata--;
-			}
 
-			if (Giocatori[0] -> stato_giocatore == 1 && Giocatori[1] -> stato_giocatore == 1)
-			{
-				puts("\n***********\n*Game Over*\n***********\n");
-				puts("\nAvviare una nuova partita?\n\n1) Sì\n\n2) No\n\n");
-				scanf("%d", &a);
-
-				switch(a)
+				if (Giocatori[0] -> stato_giocatore == 1 && Giocatori[1] -> stato_giocatore == 1)
 				{
-					case 1:
-					turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0;
-					inizializza();
-					dealloca();
-					main();
-					break;
-
-					case 2:
 					puts("\n***********\n*Game Over*\n***********\n");
-					turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0;
-					inizializza();
-					dealloca();
-					exit(1);
-					break;
+					puts("\nAvviare una nuova partita?\n\n1) Sì\n\n2) No\n\n");
+					scanf("%d", &a);
 
-					default:
-					printf("\n****************************\nScelta non valida, riprovare\n****************************\n\n");
-					break;
+					switch(a)
+					{
+						case 1:
+						turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
+						inizializza();
+						dealloca();
+						main();
+						break;
+
+						case 2:
+						puts("\n***********\n*Game Over*\n***********\n");
+						turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
+						inizializza();
+						dealloca();
+						exit(1);
+						break;
+
+						default:
+						printf("\n****************************\nScelta non valida, riprovare\n****************************\n\n");
+						break;
+					}
 				}
+
+			 	benzina_usata--;
 			}
 
 			printf("\n\n*******************************************************\nTurno: %d\n\nGiocatore: %s\n\nStato del Giocatore: %s\n\nZona in cui si trova il giocatore: ", Giocatori[player] -> turn, player == 0 ? "Giacomo" : "Marzia", Giocatori[player] -> stato_giocatore == 3 ? "Vivo" : "Ferito");
@@ -1889,36 +2098,43 @@ void gioca()
 			}
 			printf("*******************************************************\n\n");
 			printf("\n\n1) Avanza di zona\n\n2) Mostra l'oggetto presente nella zona\n\n3) Raccogli l'oggetto presente nella zona\n\n4) Curati\n\n5) Usa l'adrenalina\n\n6) Visualizza zaino\n\n7) Getta degli oggetti\n\n8) Esci dal gioco\n\n\n");
-			scanf("%1d", &a);
+			scanf("%d", &a);
 
 			switch (a)
 			{
 				case 1 :
 				avanza(Giocatori[player]);
+				Spawn = 0;
 				break;
 
 				case 2 :
 				mostra_oggetto(Giocatori[player]);
+				Spawn = 0;
 				break;
 
 				case 3:
 				prendi_oggetto(Giocatori[player]);
+				Spawn = 0;
 				break;
 
 				case 4:
 				cura(Giocatori[player]);
+				Spawn = 0;
 				break;
 
 				case 5:
 				usa_adrenalina(Giocatori[player]);
+				Spawn = 0;
 				break;
 
 				case 6:
 				zaino(Giocatori[player]);
+				Spawn = 1;
 				break;
 
 				case 7:
 				getta_oggetto(Giocatori[player]);
+				Spawn = 1;
 				break;
 
 				case 8:
@@ -1928,27 +2144,26 @@ void gioca()
 					{
 						case 1:
 						puts("\n***********\n*Game Over*\n***********\n");
-						turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0;
+						turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
 						inizializza();
 						dealloca();
 						exit(1);
 						break;
 
 						case 2:
-						gioca();
-						Giocatori[player] -> turn --;
+						Spawn = 1;
 						break;
 
 						default:
-					printf("\n****************************\nScelta non valida, riprovare\n****************************\n\n");
-					Giocatori[player] -> turn --;
-					break;	
+						printf("\n****************************\nScelta non valida, riprovare\n****************************\n\n");
+						Spawn = 1;
+						break;	
 					}
 				break;
 
 				default:
 				printf("\n****************************\nScelta non valida, riprovare\n****************************\n\n");
-				Giocatori[player] -> turn --;
+				Spawn = 1;
 				break;
 			}
 

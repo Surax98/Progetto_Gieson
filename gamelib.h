@@ -27,3 +27,5 @@ int main();
 void dealloca();
 
 void gioca();
+
+void tutorial();

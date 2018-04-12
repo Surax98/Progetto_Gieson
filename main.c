@@ -8,8 +8,10 @@ int main()
 {	
 	time_t t;
 	srand((unsigned) time(&t)); //inizializzo generatore di numeri casuali
+
+	tutorial();
 	
-	puts("\n********************************\nBenvenuto a Lake Trasymeno, eheh\n********************************\n\nE' venerdì 13 giugno 1980 ed un gruppo di studenti universitari del Corso di Laurea in Informatica si trasferisce in vacanza al 'Campeggio Lake\nTrasymeno', che sta per riaprire. Ventitre anni prima, infatti, nello stesso campeggio, un ragazzino di nome Gieson era annegato per colpa\ndella negligenza di un programmatore: a causa di un segmentation fault nel suo programma di noleggio delle barche, alla famiglia di Gieson era stata affidata una barca con un motore difettoso. Gieson però infesta ancora il campeggio, e nutre vendetta nei confronti degli informatici\npoco attenti che hanno seguito il corso di Programmazione I giocando a League of Legends... Giacomo e Marzia, entrambi studenti del primo anno,\nrimangono isolati dagli altri quando...\n\n");
+	puts("\n********************************\nBenvenuto a Lake Trasymeno, eheh\n********************************\n\n************************************************************************************************************************************************************************\nE' venerdì 13 giugno 1980 ed un gruppo di studenti universitari del Corso di Laurea in Informatica si trasferisce in vacanza al 'Campeggio Lake Trasymeno', che sta \nper riaprire. Ventitre anni prima, infatti, nello stesso campeggio, un ragazzino di nome Gieson era annegato per colpa della negligenza di un programmatore: a causa di un segmentation fault nel suo programma di noleggio delle barche, alla famiglia di Gieson era stata affidata una barca con un motore difettoso. Gieson però infesta \nancora il campeggio, e nutre vendetta nei confronti degli informatici poco attenti che hanno seguito il corso di Programmazione I giocando a League of Legends... \nGiacomo e Marzia, entrambi studenti del primo anno, rimangono isolati dagli altri quando...\n\n************************************************************************************************************************************************************************\n\n");
 	int a;
 	
 	do 
@@ -33,6 +35,8 @@ int main()
 			switch(a)
 			{
 				case 1:
+				puts("\n***********\n*Game Over*\n***********\n");
+				dealloca();
 				exit(1);
 				break;
 

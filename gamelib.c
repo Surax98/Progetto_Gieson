@@ -1,3 +1,5 @@
+//GIACOMO SURACE MATRICOLA N.300659
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -69,117 +71,7 @@ static void Gieson(Giocatore *Giocatori)
 
 	if (Giocatori -> posizione -> zona == 6)
 	{
-		if (Gieson <= 75)
-		{
-			Spawn = 1;
-			puts("\n**************************\nAppare un Gieson selvatico\n**************************\n\n");
-			for (int i = 2; i < 5; i++)
-			{
-				if (Giocatori -> zaino[i] != 0)
-				{
-					scelta_oggetti ++;
-				}
-			}
-
-			if (scelta_oggetti > 1)
-			{
-				puts("Cosa usi per difenderti?");
-				int a;
-
-				for (int i = 2; i < scelta_oggetti + 2; i++)
-				{
-					a = 1;
-					if (Giocatori -> zaino[i] != 0)
-					{
-						switch(i)
-						{
-							case 2:
-							printf("\n\n%d) Coltello (%dx)\n", a, Giocatori -> zaino[2]);
-							break;
-
-							case 3:
-							printf("\n\n%d) Pistola (%dx)\n", a, Giocatori -> zaino[3]);
-							break;
-
-							case 4:
-							printf("\n\n%d) Benzina (%dx)\n", a, Giocatori -> zaino[4]);
-							break;
-						}
-					a++;
-					}
-				}
-
-				scanf("%d", &a);
-				switch (a)
-				{
-					case 1:
-					if (Giocatori -> zaino[COLTELLO] == 0)
-					{
-						Giocatori -> zaino[PISTOLA]--;	
-						printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
-					}
-
-					else
-					{
-						Giocatori -> zaino[COLTELLO]--;
-						Giocatori -> stato_giocatore --;
-						printf("***********************************************************\nHai usato un Coltello per difenderti, ma sei rimasto ferito\n***********************************************************\n\n");
-					}
-					break;
-
-					case 2:
-					if (Giocatori -> zaino[PISTOLA] == 0)
-					{
-						Giocatori -> zaino[BENZINA]--;
-						benzina_usata = 4;
-						printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
-					}
-
-					else
-					{
-						Giocatori -> zaino[PISTOLA]--;
-						printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
-					}
-					break;
-
-					case 3:
-					Giocatori -> zaino[BENZINA]--;
-					benzina_usata = 4;
-					printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
-					break;
-				}
-			}
-
-			else if (scelta_oggetti == 1)
-			{
-				if (Giocatori -> zaino[2] != 0)
-				{
-					Giocatori -> zaino[COLTELLO]--;
-					Giocatori -> stato_giocatore --;
-					printf("***********************************************************\nHai usato un Coltello per difenderti, ma sei rimasto ferito\n***********************************************************\n\n");
-				}
-
-				else if (Giocatori -> zaino[3] != 0)
-				{
-					Giocatori -> zaino[PISTOLA]--;	
-					printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)n******************************************************************\n\n");				
-				}
-
-				else if (Giocatori -> zaino[BENZINA] != 0)
-				{
-					Giocatori -> zaino[BENZINA]--;
-					benzina_usata = 4;
-					printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
-				}
-			}
-
-			else
-			{
-				morte = 1;
-				Giocatori -> stato_giocatore = 1;
-				printf("*******************************************************************\nNon avevi nulla con cui difenderti: Gieson ti ha ucciso senza pietà\n*******************************************************************\n\n");
-			}
-		}
+		
 	}
 
 	else if (difficolta == 1)
@@ -199,11 +91,10 @@ static void Gieson(Giocatore *Giocatori)
 			if (scelta_oggetti > 1)
 			{
 				puts("Cosa usi per difenderti?");
-				int a;
+				int a = 1;
 
-				for (int i = 2; i < scelta_oggetti + 2; i++)
+				for (int i = 2; i < 5; i++)
 				{
-					a = 1;
 					if (Giocatori -> zaino[i] != 0)
 					{
 						switch(i)
@@ -223,46 +114,54 @@ static void Gieson(Giocatore *Giocatori)
 					a++;
 					}
 				}
-
-				scanf("%d", &a);
-				switch (a)
-				{
-					case 1:
-					if (Giocatori -> zaino[COLTELLO] == 0)
+				
+				do
+				{	
+					scanf("%d", &a);
+					switch (a)
 					{
-						Giocatori -> zaino[PISTOLA]--;	
-						printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
-					}
+						case 1:
+						if (Giocatori -> zaino[COLTELLO] == 0)
+						{
+							Giocatori -> zaino[PISTOLA]--;	
+							printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
+						}
 
-					else
-					{
-						Giocatori -> zaino[COLTELLO]--;
-						Giocatori -> stato_giocatore --;
-						printf("***********************************************************\nHai usato un Coltello per difenderti, ma sei rimasto ferito\n***********************************************************\n\n");
-					}
-					break;
+						else
+						{
+							Giocatori -> zaino[COLTELLO]--;
+							Giocatori -> stato_giocatore --;
+							printf("***********************************************************\nHai usato un Coltello per difenderti, ma sei rimasto ferito\n***********************************************************\n\n");
+						}
+						break;
 
-					case 2:
-					if (Giocatori -> zaino[PISTOLA] == 0)
-					{
+						case 2:
+						if (Giocatori -> zaino[PISTOLA] == 0)
+						{
+							Giocatori -> zaino[BENZINA]--;
+							benzina_usata = 5;
+							printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
+						}
+
+						else
+						{
+							Giocatori -> zaino[PISTOLA]--;
+							printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
+						}
+						break;
+
+						case 3:
 						Giocatori -> zaino[BENZINA]--;
-						benzina_usata = 4;
+						benzina_usata = 5;
 						printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
-					}
+						break;
 
-					else
-					{
-						Giocatori -> zaino[PISTOLA]--;
-						printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
+						default:
+						printf("\n****************************\nScelta non valida, riprovare\n****************************\n\n");
+						break;
 					}
-					break;
-
-					case 3:
-					Giocatori -> zaino[BENZINA]--;
-					benzina_usata = 4;
-					printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
-					break;
 				}
+				while (a<0 && a>3);
 			}
 
 			else if (scelta_oggetti == 1)
@@ -277,13 +176,13 @@ static void Gieson(Giocatore *Giocatori)
 				else if (Giocatori -> zaino[3] != 0)
 				{
 					Giocatori -> zaino[PISTOLA]--;	
-					printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)n******************************************************************\n\n");				
+					printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
 				}
 
 				else if (Giocatori -> zaino[BENZINA] != 0)
 				{
 					Giocatori -> zaino[BENZINA]--;
-					benzina_usata = 4;
+					benzina_usata = 5;
 					printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
 				}
 			}
@@ -314,11 +213,10 @@ static void Gieson(Giocatore *Giocatori)
 			if (scelta_oggetti > 1)
 			{
 				puts("Cosa usi per difenderti?");
-				int a;
+				int a = 1;
 
-				for (int i = 2; i < scelta_oggetti + 2; i++)
+				for (int i = 2; i < 5; i++)
 				{
-					a = 1;
 					if (Giocatori -> zaino[i] != 0)
 					{
 						switch(i)
@@ -339,45 +237,53 @@ static void Gieson(Giocatore *Giocatori)
 					}
 				}
 
-				scanf("%d", &a);
-				switch (a)
-				{
-					case 1:
-					if (Giocatori -> zaino[COLTELLO] == 0)
+				do
+				{	
+					scanf("%d", &a);
+					switch (a)
 					{
-						Giocatori -> zaino[PISTOLA]--;	
-						printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
-					}
+						case 1:
+						if (Giocatori -> zaino[COLTELLO] == 0)
+						{
+							Giocatori -> zaino[PISTOLA]--;	
+							printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
+						}
 
-					else
-					{
-						Giocatori -> zaino[COLTELLO]--;
-						Giocatori -> stato_giocatore --;
-						printf("***********************************************************\nHai usato un Coltello per difenderti, ma sei rimasto ferito\n***********************************************************\n\n");
-					}
-					break;
+						else
+						{
+							Giocatori -> zaino[COLTELLO]--;
+							Giocatori -> stato_giocatore --;
+							printf("***********************************************************\nHai usato un Coltello per difenderti, ma sei rimasto ferito\n***********************************************************\n\n");
+						}
+						break;
 
-					case 2:
-					if (Giocatori -> zaino[PISTOLA] == 0)
-					{
+						case 2:
+						if (Giocatori -> zaino[PISTOLA] == 0)
+						{
+							Giocatori -> zaino[BENZINA]--;
+							benzina_usata = 5;
+							printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
+						}
+
+						else
+						{
+							Giocatori -> zaino[PISTOLA]--;
+							printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
+						}
+						break;
+
+						case 3:
 						Giocatori -> zaino[BENZINA]--;
-						benzina_usata = 4;
+						benzina_usata = 5;
 						printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
-					}
+						break;
 
-					else
-					{
-						Giocatori -> zaino[PISTOLA]--;
-						printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
+						default:
+						printf("\n****************************\nScelta non valida, riprovare\n****************************\n\n");
+						break;
 					}
-					break;
-
-					case 3:
-					Giocatori -> zaino[BENZINA]--;
-					benzina_usata = 4;
-					printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
-					break;
 				}
+				while (a<0 && a>3);
 			}
 
 			else if (scelta_oggetti == 1)
@@ -392,13 +298,13 @@ static void Gieson(Giocatore *Giocatori)
 				else if (Giocatori -> zaino[3] != 0)
 				{
 					Giocatori -> zaino[PISTOLA]--;	
-					printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)n******************************************************************\n\n");				
+					printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
 				}
 
 				else if (Giocatori -> zaino[BENZINA] != 0)
 				{
 					Giocatori -> zaino[BENZINA]--;
-					benzina_usata = 4;
+					benzina_usata = 5;
 					printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
 				}
 			}
@@ -429,11 +335,10 @@ static void Gieson(Giocatore *Giocatori)
 			if (scelta_oggetti > 1)
 			{
 				puts("Cosa usi per difenderti?");
-				int a;
+				int a = 1;
 
-				for (int i = 2; i < scelta_oggetti + 2; i++)
+				for (int i = 2; i < 5; i++)
 				{
-					a = 1;
 					if (Giocatori -> zaino[i] != 0)
 					{
 						switch(i)
@@ -454,45 +359,53 @@ static void Gieson(Giocatore *Giocatori)
 					}
 				}
 
-				scanf("%d", &a);
-				switch (a)
-				{
-					case 1:
-					if (Giocatori -> zaino[COLTELLO] == 0)
+				do
+				{	
+					scanf("%d", &a);
+					switch (a)
 					{
-						Giocatori -> zaino[PISTOLA]--;	
-						printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
-					}
+						case 1:
+						if (Giocatori -> zaino[COLTELLO] == 0)
+						{
+							Giocatori -> zaino[PISTOLA]--;	
+							printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
+						}
 
-					else
-					{
-						Giocatori -> zaino[COLTELLO]--;
-						Giocatori -> stato_giocatore --;
-						printf("***********************************************************\nHai usato un Coltello per difenderti, ma sei rimasto ferito\n***********************************************************\n\n");
-					}
-					break;
+						else
+						{
+							Giocatori -> zaino[COLTELLO]--;
+							Giocatori -> stato_giocatore --;
+							printf("***********************************************************\nHai usato un Coltello per difenderti, ma sei rimasto ferito\n***********************************************************\n\n");
+						}
+						break;
 
-					case 2:
-					if (Giocatori -> zaino[PISTOLA] == 0)
-					{
+						case 2:
+						if (Giocatori -> zaino[PISTOLA] == 0)
+						{
+							Giocatori -> zaino[BENZINA]--;
+							benzina_usata = 5;
+							printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
+						}
+
+						else
+						{
+							Giocatori -> zaino[PISTOLA]--;
+							printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
+						}
+						break;
+
+						case 3:
 						Giocatori -> zaino[BENZINA]--;
-						benzina_usata = 4;
+						benzina_usata = 5;
 						printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
-					}
+						break;
 
-					else
-					{
-						Giocatori -> zaino[PISTOLA]--;
-						printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
+						default:
+						printf("\n****************************\nScelta non valida, riprovare\n****************************\n\n");
+						break;
 					}
-					break;
-
-					case 3:
-					Giocatori -> zaino[BENZINA]--;
-					benzina_usata = 4;
-					printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
-					break;
 				}
+				while (a<0 && a>3);
 			}
 
 			else if (scelta_oggetti == 1)
@@ -507,13 +420,13 @@ static void Gieson(Giocatore *Giocatori)
 				else if (Giocatori -> zaino[3] != 0)
 				{
 					Giocatori -> zaino[PISTOLA]--;	
-					printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)n******************************************************************\n\n");				
+					printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
 				}
 
 				else if (Giocatori -> zaino[BENZINA] != 0)
 				{
 					Giocatori -> zaino[BENZINA]--;
-					benzina_usata = 4;
+					benzina_usata = 5;
 					printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
 				}
 			}
@@ -544,11 +457,10 @@ static void Gieson(Giocatore *Giocatori)
 			if (scelta_oggetti > 1)
 			{
 				puts("Cosa usi per difenderti?");
-				int a;
+				int a = 1;
 
-				for (int i = 2; i < scelta_oggetti + 2; i++)
+				for (int i = 2; i < 5; i++)
 				{
-					a = 1;
 					if (Giocatori -> zaino[i] != 0)
 					{
 						switch(i)
@@ -569,45 +481,53 @@ static void Gieson(Giocatore *Giocatori)
 					}
 				}
 
-				scanf("%d", &a);
-				switch (a)
-				{
-					case 1:
-					if (Giocatori -> zaino[COLTELLO] == 0)
+				do
+				{	
+					scanf("%d", &a);
+					switch (a)
 					{
-						Giocatori -> zaino[PISTOLA]--;	
-						printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
-					}
+						case 1:
+						if (Giocatori -> zaino[COLTELLO] == 0)
+						{
+							Giocatori -> zaino[PISTOLA]--;	
+							printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
+						}
 
-					else
-					{
-						Giocatori -> zaino[COLTELLO]--;
-						Giocatori -> stato_giocatore --;
-						printf("***********************************************************\nHai usato un Coltello per difenderti, ma sei rimasto ferito\n***********************************************************\n\n");
-					}
-					break;
+						else
+						{
+							Giocatori -> zaino[COLTELLO]--;
+							Giocatori -> stato_giocatore --;
+							printf("***********************************************************\nHai usato un Coltello per difenderti, ma sei rimasto ferito\n***********************************************************\n\n");
+						}
+						break;
 
-					case 2:
-					if (Giocatori -> zaino[PISTOLA] == 0)
-					{
+						case 2:
+						if (Giocatori -> zaino[PISTOLA] == 0)
+						{
+							Giocatori -> zaino[BENZINA]--;
+							benzina_usata = 5;
+							printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
+						}
+
+						else
+						{
+							Giocatori -> zaino[PISTOLA]--;
+							printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
+						}
+						break;
+
+						case 3:
 						Giocatori -> zaino[BENZINA]--;
-						benzina_usata = 4;
+						benzina_usata = 5;
 						printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
-					}
+						break;
 
-					else
-					{
-						Giocatori -> zaino[PISTOLA]--;
-						printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
+						default:
+						printf("\n****************************\nScelta non valida, riprovare\n****************************\n\n");
+						break;
 					}
-					break;
-
-					case 3:
-					Giocatori -> zaino[BENZINA]--;
-					benzina_usata = 4;
-					printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
-					break;
 				}
+				while (a<0 && a>3);
 			}
 
 			else if (scelta_oggetti == 1)
@@ -622,13 +542,13 @@ static void Gieson(Giocatore *Giocatori)
 				else if (Giocatori -> zaino[3] != 0)
 				{
 					Giocatori -> zaino[PISTOLA]--;	
-					printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)n******************************************************************\n\n");				
+					printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
 				}
 
 				else if (Giocatori -> zaino[BENZINA] != 0)
 				{
 					Giocatori -> zaino[BENZINA]--;
-					benzina_usata = 4;
+					benzina_usata = 5;
 					printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
 				}
 			}
@@ -659,12 +579,11 @@ static void Gieson(Giocatore *Giocatori)
 			if (scelta_oggetti > 1)
 			{
 				puts("Cosa usi per difenderti?");
-				int a;
+				int a = 1;
 
-				for (int i = 2; i < scelta_oggetti + 2; i++)
+				for (int i = 2; i < 5; i++)
 				{
-					a = 1;
-					if (Giocatori -> zaino[i] != 0)
+					if (Giocatori -> zaino[i] > 0)
 					{
 						switch(i)
 						{
@@ -684,45 +603,53 @@ static void Gieson(Giocatore *Giocatori)
 					}
 				}
 
-				scanf("%d", &a);
-				switch (a)
-				{
-					case 1:
-					if (Giocatori -> zaino[COLTELLO] == 0)
+				do
+				{	
+					scanf("%d", &a);
+					switch (a)
 					{
-						Giocatori -> zaino[PISTOLA]--;	
-						printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
-					}
+						case 1:
+						if (Giocatori -> zaino[COLTELLO] == 0)
+						{
+							Giocatori -> zaino[PISTOLA]--;	
+							printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
+						}
 
-					else
-					{
-						Giocatori -> zaino[COLTELLO]--;
-						Giocatori -> stato_giocatore --;
-						printf("***********************************************************\nHai usato un Coltello per difenderti, ma sei rimasto ferito\n***********************************************************\n\n");
-					}
-					break;
+						else
+						{
+							Giocatori -> zaino[COLTELLO]--;
+							Giocatori -> stato_giocatore --;
+							printf("***********************************************************\nHai usato un Coltello per difenderti, ma sei rimasto ferito\n***********************************************************\n\n");
+						}
+						break;
 
-					case 2:
-					if (Giocatori -> zaino[PISTOLA] == 0)
-					{
+						case 2:
+						if (Giocatori -> zaino[PISTOLA] == 0)
+						{
+							Giocatori -> zaino[BENZINA]--;
+							benzina_usata = 5;
+							printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
+						}
+
+						else
+						{
+							Giocatori -> zaino[PISTOLA]--;
+							printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
+						}
+						break;
+
+						case 3:
 						Giocatori -> zaino[BENZINA]--;
-						benzina_usata = 4;
+						benzina_usata = 5;
 						printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
-					}
+						break;
 
-					else
-					{
-						Giocatori -> zaino[PISTOLA]--;
-						printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
+						default:
+						printf("\n****************************\nScelta non valida, riprovare\n****************************\n\n");
+						break;
 					}
-					break;
-
-					case 3:
-					Giocatori -> zaino[BENZINA]--;
-					benzina_usata = 4;
-					printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
-					break;
 				}
+				while (a<0 && a>3);
 			}
 
 			else if (scelta_oggetti == 1)
@@ -737,13 +664,13 @@ static void Gieson(Giocatore *Giocatori)
 				else if (Giocatori -> zaino[3] != 0)
 				{
 					Giocatori -> zaino[PISTOLA]--;	
-					printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)n******************************************************************\n\n");				
+					printf("******************************************************************\nGieson ha sentito una sparo e si è spaventato: sei salvo (per ora)\n******************************************************************\n\n");				
 				}
 
 				else if (Giocatori -> zaino[BENZINA] != 0)
 				{
 					Giocatori -> zaino[BENZINA]--;
-					benzina_usata = 4;
+					benzina_usata = 5;
 					printf("**************************************************************************************\nHAI USATO LA BENZINAAAAAA!!! Gieson non apparirà per 2 turni ciascuno o prenderà fuoco\n**************************************************************************************\n\n");
 				}
 			}
@@ -984,7 +911,7 @@ static void getta_oggetto(Giocatore *Giocatori)
 
 			else
 			{
-				puts("Non puoi gettare delle cose che non hai, svegliati.");
+			puts("\n***************************************************\nNon puoi gettare delle cose che non hai, svegliati.\n***************************************************\n");
 			}
 		}			
 		break;
@@ -1007,7 +934,7 @@ static void getta_oggetto(Giocatore *Giocatori)
 
 			else
 			{
-				puts("Non puoi gettare delle cose che non hai, svegliati.");
+			puts("\n***************************************************\nNon puoi gettare delle cose che non hai, svegliati.\n***************************************************\n");
 			}
 		}	
 		break;
@@ -1030,7 +957,7 @@ static void getta_oggetto(Giocatore *Giocatori)
 
 			else
 			{
-				puts("Non puoi gettare delle cose che non hai, svegliati.");
+			puts("\n***************************************************\nNon puoi gettare delle cose che non hai, svegliati.\n***************************************************\n");
 			}
 		}	
 		break;
@@ -1053,7 +980,7 @@ static void getta_oggetto(Giocatore *Giocatori)
 
 			else
 			{
-				puts("Non puoi gettare delle cose che non hai, svegliati.");
+			puts("\n***************************************************\nNon puoi gettare delle cose che non hai, svegliati.\n***************************************************\n");
 			}
 		}	
 		break;
@@ -1209,7 +1136,7 @@ static void inizializza()
 		Giocatori[i] -> zaino[CIANFRUSAGLIA] = 0;
 		Giocatori[i] -> zaino[BENDE] = 0;
 		Giocatori[i] -> zaino[PISTOLA] = 0;
-		Giocatori[i] -> zaino[BENZINA] = 0;
+		Giocatori[i] -> zaino[BENZINA] = 10;
 		Giocatori[i] -> turn = 1;
 		Giocatori[i] -> ZoneNumber = 1;
 	}
@@ -1218,6 +1145,36 @@ static void inizializza()
 	Giocatori[1] -> zaino[COLTELLO] = 0;
 	Giocatori[0] -> zaino[ADRENALINA] = 0;
 	Giocatori[1] -> zaino[ADRENALINA] = 2;
+}
+
+static void game_over()
+{
+	puts("\n***********\n*Game Over*\n***********\n");
+	puts("\nAvviare una nuova partita?\n\n1) Sì\n\n2) No\n\n");
+	int a;
+	scanf("%d", &a);
+
+	switch(a)
+	{
+		case 1:
+		turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
+		inizializza();
+		dealloca();
+		main();
+		break;
+
+		case 2:
+		puts("\n***********\n*Game Over*\n***********\n");
+		turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
+		inizializza();
+		dealloca();
+		exit(1);
+		break;
+
+		default:
+		printf("\n****************************\nScelta non valida, riprovare\n****************************\n\n");
+		break;
+	}
 }
 
 static void random_map()
@@ -1558,7 +1515,7 @@ static void random_map()
 
 static void ins_zona()
 {	
-	int b, oggetto; // b = parametro di scelta nella funzione ins_zona(), oggetto = parametro per la generazione di oggetti nelle mappe
+	int zone, oggetto; // b = parametro di scelta nella funzione ins_zona(), oggetto = parametro per la generazione di oggetti nelle mappe
 	if (prima_zona == NULL)
 	{
 	prima_zona = (Zona *) malloc(sizeof(Zona));
@@ -1581,9 +1538,9 @@ static void ins_zona()
 
 	puts("\n\n**********************************************************************\nScegliere le aree della mappa (verranno inserite nell'ordine digitato):\n**********************************************************************\n\n1) Cucina\n\n2) Soggiorno\n\n3) Rimessa\n\n4) Strada\n\n5) Lungo Lago\n\n6) Uscita Campeggio\n\n");
 	oggetto = rand() % 10;
-	scanf("%d", &b);
+	scanf("%d", &zone);
 
-	switch (b) //assegna un valore da 1 a 6 all'ultima zona
+	switch (zone) //assegna un valore da 1 a 6 all'ultima zona
 	{	
 		case 1:
 			ultima_zona -> zona = CUCINA;
@@ -1771,23 +1728,18 @@ static void stampa_mappa()
 		case 0:
 		printf("Cianfrusaglia\n\n");
 		break;
-
 		case 1:
 		printf("Bende\n\n");
 		break;
-
 		case 2:
 		printf("Coltello\n\n");
 		break;
-
 		case 3:
 		printf("Pistola\n\n");
 		break;
-
 		case 4:
 		printf("Benzina\n\n");
 		break;
-
 		case 5:
 		printf("Adrenalina\n\n");
 		break;
@@ -1912,36 +1864,12 @@ void gioca()
 			if (Giocatori[0] -> stato_giocatore == 4 && Giocatori[1] -> stato_giocatore == 4)
 			{	
 				puts("*****************************************************************************************\nGiocare a League of Legends durante le spiegazioni di Santini ti ha ripagato, bel lavoro!\n*****************************************************************************************");
-				puts("\n***********\n*Game Over*\n***********\n");
-				puts("\nAvviare una nuova partita?\n\n1) Sì\n\n2) No\n\n");
-				scanf("%d", &a);
-
-				switch(a)
-				{
-					case 1:
-					turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
-					inizializza();
-					dealloca();
-					main();
-					break;
-
-					case 2:
-					puts("\n***********\n*Game Over*\n***********\n");
-					turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
-					inizializza();
-					dealloca();
-					exit(1);
-					break;
-
-					default:
-					printf("\n****************************\nScelta non valida, riprovare\n****************************\n\n");
-					break;
-				}
+				game_over();
 			}
 
 			if(Giocatori[0] -> stato_giocatore != 1 && Giocatori[1] -> stato_giocatore != 1 && mossa == 0)
 			{	
-				if (benzina_usata <= 0 && Spawn == 0)
+				if (benzina_usata <= 0 && Spawn == 0 && mossa == 0)
 				{
 					Gieson(Giocatori[player]);
 				}
@@ -1960,62 +1888,14 @@ void gioca()
 
 			 		if (Giocatori[1] -> stato_giocatore == 1 && Giocatori[0] -> stato_giocatore == 4)
 			 		{
-			 			puts("\n***********\n*Game Over*\n***********\n");
 			 			puts("\n******************************************\nPurtoppo non sei riuscito a salvare Marzia\n******************************************\n");
-						puts("\nAvviare una nuova partita?\n\n1) Sì\n\n2) No\n\n");
-						scanf("%d", &a);
-
-						switch(a)
-						{
-							case 1:
-							turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
-							inizializza();
-							dealloca();
-							main();
-							break;
-
-							case 2:
-							puts("\n***********\n*Game Over*\n***********\n");
-							turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
-							inizializza();
-							dealloca();
-							exit(1);
-							break;
-
-							default:
-							printf("\n****************************\nScelta non valida, riprovare\n****************************\n\n");
-							break;
-						}
+						game_over();
 			 		}
 
 			 		else if (Giocatori[0] -> stato_giocatore == 1 && Giocatori[1] -> stato_giocatore == 4)
 			 		{
-			 			puts("\n***********\n*Game Over*\n***********\n");
 			 			puts("\n*******************************************\nPurtoppo non sei riuscita a salvare Giacomo\n*******************************************\n");
-						puts("\nAvviare una nuova partita?\n\n1) Sì\n\n2) No\n\n");
-						scanf("%d", &a);
-
-						switch(a)
-						{
-							case 1:
-							turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
-							inizializza();
-							dealloca();
-							main();
-							break;
-
-							case 2:
-							puts("\n***********\n*Game Over*\n***********\n");
-							turn = 0, player = 0, mossa = 1, difficolta = 2, benzina_usata = 0, scelta_oggetti = 0, difficolta_selezionata = 0;
-							inizializza();
-							dealloca();
-							exit(1);
-							break;
-
-							default:
-							printf("\n****************************\nScelta non valida, riprovare\n****************************\n\n");
-							break;
-						}
+			 			game_over();
 			 		}
 			 	}
 
@@ -2024,13 +1904,14 @@ void gioca()
 			 		player = 0;
 			 	}
 
-			 	if (benzina_usata <= 0 && Spawn == 0)
+			 	if (benzina_usata <= 0 && Spawn == 0 && mossa == 0)
 				{
 					Gieson(Giocatori[player]);
 				}
 
 				mossa = 1;
-				if (morte == 1)
+
+				if (morte == 0)
 				{
 					Giocatori[player] -> turn ++;
 				}

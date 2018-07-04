@@ -1797,6 +1797,48 @@ void crea_mappa()
 	do 
 	{
 		printf("\n\n*************************************\nScegliere un'azione da intraprendere:\n*************************************\n\n\n1) Aggiungi zona\n\n2) Cancella zona\n\n3) Mostra mappa\n\n4) Mappa Random\n\n5) Chiudi mappa\n\n\n");
+		int count_1 = 0, count_2 = 0, count_3 = 0, count_4 = 0, count_5 = 0, count_6 = 0;
+		Zona *temp = prima_zona;
+		for (int i = 0; i < CountZone; i++)
+		{
+			switch(temp -> zona)
+			{
+				case 1:
+				count_1 ++;
+				break;
+				
+				case 2:
+				count_2 ++;
+				break;
+
+				case 3:
+				count_3 ++;
+				break;
+
+				case 4:
+				count_4 ++;
+				break;
+
+				case 5:
+				count_5 ++;
+				break;
+
+				case 6:
+				count_6 ++;
+				break;	
+
+			}
+			temp = temp -> zona_successiva;					
+		}
+
+		printf("***************************\nElenco delle aree di gioco:\n***************************\n\n");
+		printf("Ci sono %d Cucine\n", count_1);
+		printf("Ci sono %d Soggiorni\n", count_2);
+		printf("Ci sono %d Rimesse\n", count_3);
+		printf("Ci sono %d Strade\n", count_4);
+		printf("Ci sono %d Lunghi Lago\n", count_5);
+		printf("C'e' %d Uscita dal campeggio\n\n", count_6);
+		
 		scanf("%d", &a);
 		puts("");
 
